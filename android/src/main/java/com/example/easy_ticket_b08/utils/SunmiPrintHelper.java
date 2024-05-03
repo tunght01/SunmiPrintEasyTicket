@@ -70,15 +70,17 @@ public class SunmiPrintHelper {
     /**
      * init sunmi print service
      */
-    public void initSunmiPrinterService(){
+    public boolean initSunmiPrinterService(){
         try {
             boolean ret =  InnerPrinterManager.getInstance().bindService(_context,
                     innerPrinterCallback);
             if(!ret){
                 sunmiPrinter = NoSunmiPrinter;
             }
+            return ret;
         } catch (InnerPrinterException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

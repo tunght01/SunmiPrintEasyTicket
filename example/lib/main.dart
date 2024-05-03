@@ -27,7 +27,9 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await SunmiPrinter.bindPrinterService();
+                  await SunmiPrinter.bindPrinterService().then((value) {
+                    print(value);
+                  });
                   await SunmiPrinter.initPrinter();
                   await SunmiPrinter.startTransactionPrint(true);
                   await SunmiPrinter.printText(
