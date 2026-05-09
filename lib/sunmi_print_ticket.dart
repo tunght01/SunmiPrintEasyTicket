@@ -165,10 +165,10 @@ class SunmiPrinter {
   static Future<void> printTable(
       {required List<ColumnMaker> cols, int? size}) async {
     size ??= 20;
-    final _jsonCols = List<Map<String, String>>.from(
+    final jsonCols = List<Map<String, String>>.from(
         cols.map<Map<String, String>>((ColumnMaker col) => col.toJson()));
     Map<String, dynamic> arguments = <String, dynamic>{
-      "cols": json.encode(_jsonCols),
+      "cols": json.encode(jsonCols),
       "size": size
     };
     await platform.invokeMethod("PRINT_TABLE", arguments);

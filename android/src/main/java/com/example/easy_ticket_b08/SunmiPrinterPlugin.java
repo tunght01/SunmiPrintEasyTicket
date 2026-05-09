@@ -63,8 +63,8 @@ public class SunmiPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         // (call, result) -> {
         switch (call.method) {
             case "BIND_PRINTER_SERVICE":
-                sunmiPrintHelper.initSunmiPrinterService();
-                result.success(true);
+                boolean isSunmi = sunmiPrintHelper.initSunmiPrinterService();
+                result.success(isSunmi);
                 break;
             case "UNBIND_PRINTER_SERVICE":
                 sunmiPrintHelper.deInitSunmiPrinterService();

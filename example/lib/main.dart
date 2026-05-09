@@ -1,20 +1,21 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sunmi_print_ticket/sunmi_print_ticket.dart';
 import 'package:intl/intl.dart';
+
 void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Application",
-      home: HomePrinterView()
+      home: HomePrinterView(),
     ),
   );
 }
 
 class HomePrinterView extends StatelessWidget {
+  const HomePrinterView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +28,9 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await SunmiPrinter.bindPrinterService();
+                  await SunmiPrinter.bindPrinterService().then((value) {
+                    debugPrint('$value');
+                  });
                   await SunmiPrinter.initPrinter();
                   await SunmiPrinter.startTransactionPrint(true);
                   await SunmiPrinter.printText(
@@ -222,7 +225,7 @@ class HomePrinterView extends StatelessWidget {
                   await SunmiPrinter.printLine(2);
                   await SunmiPrinter.exitTransactionPrint(true);
                 },
-                child: Text("In ảnh"),
+                child: const Text("In ảnh"),
               ),
             ),
           ],
@@ -269,23 +272,37 @@ class AppConst {
   static const String location = "Bắc Ninh - Thanh Hoá";
 }
 
-const String PATTERN_1 = "dd/MM/yyyy";
-const String PATTERN_DD = "dd";
-const String PATTERN_MM = "MM";
-const String PATTERN_YY = "yyyy";
-const String PATTERN_2 = "dd/MM";
-const String PATTERN_3 = "yyyy-MM-dd'T'HHmmss";
-const String PATTERN_4 = "h:mm a dd/MM";
-const String PATTERN_5 = "yyyy-MM-dd HH:mm:ss";
-const String PATTERN_6 = "dd/MM/yyyy HH:mm";
-const String PATTERN_7 = "HH:mm dd/MM/yyyy";
-const String PATTERN_8 = "yyyy-MM-ddTHH:mm:ss";
-const String PATTERN_9 = "HH:mm - dd/MM/yyyy";
-const String PATTERN_10 = "dd/MM/yyyy HH:mm:ss";
-const String PATTERN_11 = "HH:mm";
-const String PATTERN_DEFAULT = "yyyy-MM-dd";
+// ignore: constant_identifier_names
+const String pattern1 = "dd/MM/yyyy";
+// ignore: constant_identifier_names
+const String patternDd = "dd";
+// ignore: constant_identifier_names
+const String patternMm = "MM";
+// ignore: constant_identifier_names
+const String patternYy = "yyyy";
+// ignore: constant_identifier_names
+const String pattern2 = "dd/MM";
+// ignore: constant_identifier_names
+const String pattern3 = "yyyy-MM-dd'T'HHmmss";
+// ignore: constant_identifier_names
+const String pattern4 = "h:mm a dd/MM";
+// ignore: constant_identifier_names
+const String pattern5 = "yyyy-MM-dd HH:mm:ss";
+// ignore: constant_identifier_names
+const String pattern6 = "dd/MM/yyyy HH:mm";
+// ignore: constant_identifier_names
+const String pattern7 = "HH:mm dd/MM/yyyy";
+// ignore: constant_identifier_names
+const String pattern8 = "yyyy-MM-ddTHH:mm:ss";
+// ignore: constant_identifier_names
+const String pattern9 = "HH:mm - dd/MM/yyyy";
+// ignore: constant_identifier_names
+const String pattern10 = "dd/MM/yyyy HH:mm:ss";
+// ignore: constant_identifier_names
+const String pattern11 = "HH:mm";
+// ignore: constant_identifier_names
+const String patternDefault = "yyyy-MM-dd";
 
 String convertDateToString(DateTime dateTime, String pattern) {
   return DateFormat(pattern).format(dateTime);
 }
-
